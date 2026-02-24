@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 // manual constructor injection
 // TODO: Hilt DI
 
-class MealViewModel (private val mealRepository: MealRepository): ViewModel(){
+class MealViewModel (private val mealRepository: MealRepository = MealRepository()): ViewModel(){
 
     private val _mealState = MutableLiveData<MealState>(MealState.Loading)
     val mealState: LiveData<MealState> = _mealState
