@@ -21,6 +21,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -39,7 +40,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.themealapp.model.Meal
 import com.example.themealapp.viewmodel.MealState
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MealViewModel by viewModels()
@@ -66,6 +69,9 @@ class MainActivity : ComponentActivity() {
 fun MealScreen(viewModel: MealViewModel, modifier: Modifier = Modifier) {
     // UI for MealScreen will go here
 
+//    LaunchedEffect(Unit) {
+//        viewModel.fetchMeals()
+//    }
     val state by viewModel.mealState.observeAsState(MealState.Loading)
 
     Box(

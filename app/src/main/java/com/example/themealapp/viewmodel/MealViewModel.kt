@@ -5,14 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themealapp.repository.MealRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 // manual constructor injection
 // TODO: Hilt DI
 
-class MealViewModel (private val mealRepository: MealRepository = MealRepository()): ViewModel(){
+@HiltViewModel
 
+//class MealViewModel (private val mealRepository: MealRepository = MealRepository()): ViewModel(){
+class MealViewModel @Inject constructor(
+    private val mealRepository: MealRepository
+) : ViewModel() {
     private val _mealState = MutableLiveData<MealState>(MealState.Loading)
     val mealState: LiveData<MealState> = _mealState
 
@@ -26,7 +32,7 @@ class MealViewModel (private val mealRepository: MealRepository = MealRepository
     }
 
 
-    private fun fetchMeals(){
+     private fun fetchMeals(){
         viewModelScope.launch {
             _mealState.value = MealState.Loading
             val result = mealRepository.getMeals()

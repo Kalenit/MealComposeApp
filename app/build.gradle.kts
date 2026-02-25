@@ -1,12 +1,24 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    // Apply the KSP plugin
+
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
+
+
 }
 
 android {
     namespace = "com.example.themealapp"
+
     compileSdk {
         version = release(36)
+    }
+// Ensure Java 11 compatibility
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     defaultConfig {
@@ -68,4 +80,15 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.9.1")
     // Coil for images
     implementation("io.coil-kt:coil-compose:2.6.0")
+
+
+    // Hilt
+  //  ksp("androidx.room:room-compiler:2.6.1") // Check for the correct library and version
+    //ksp("com.google.dagger:dagger-compiler:2.51.1")
+//    implementation("com.google.dagger:hilt-android:2.57.1")
+//    ksp("com.google.dagger:hilt-android-compiler:2.57.1")
+//    annotationProcessor ("com.google.dagger:hilt-compiler:2.57.1")
+    implementation(libs.hilt)
+    ksp(libs.hilt.compiler) // Use `ksp` instead of `kapt`
+
 }
