@@ -32,7 +32,7 @@ class MealViewModel @Inject constructor(
     }
 
 
-     private fun fetchMeals(){
+     fun fetchMeals(){
         viewModelScope.launch {
             _mealState.value = MealState.Loading
             val result = mealRepository.getMeals()

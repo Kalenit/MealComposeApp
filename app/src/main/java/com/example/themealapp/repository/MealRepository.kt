@@ -2,6 +2,7 @@ package com.example.themealapp.repository
 
 import com.example.themealapp.api.MealApi
 import com.example.themealapp.model.Meal
+import com.example.themealapp.model.MealDetail
 import com.example.themealapp.model.MealResponse
 import com.example.themealapp.remote.RetrofitClient
 import jakarta.inject.Singleton
@@ -27,5 +28,19 @@ class MealRepository @Inject constructor(
             Result.failure(e)
         }
 
+    }
+
+    suspend fun getMealDetail(id: String): Result<MealDetail> = withContext(Dispatchers.IO) {
+        try {
+            val response = api.getMealDetail(id)
+            val meal = response.meals?.firstOrNull()
+            if (meal != null) {
+                Result.success(meal)
+            } else {
+                Result.failure(Exception("Meal not found"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 }

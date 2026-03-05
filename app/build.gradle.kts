@@ -91,4 +91,8 @@ dependencies {
     implementation(libs.hilt)
     ksp(libs.hilt.compiler) // Use `ksp` instead of `kapt`
 
+    implementation("androidx.navigation:navigation-compose:2.9.7")
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.3.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+
 }
